@@ -1,6 +1,6 @@
-import { put, takeEvery, call } from 'redux-saga/effects';
+import { put, takeEvery, call, all } from 'redux-saga/effects';
 import { constants, loginSuccess } from './actions';
-
+import { repositories } from '../Repositories/actions';
 const base = 'https://api.github.com';
 
 const urls = {
@@ -21,7 +21,10 @@ export function* getUserSaga(action) {
 
     try {
         const data = yield call(getRequest, token);
-        yield put(loginSuccess(data));
+        yield all([
+            put(loginSuccess(data)),
+            put(repositories(data.repos_url))
+        ]);
     } catch (err) {
         console.log(err);
     }

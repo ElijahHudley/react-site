@@ -2,20 +2,20 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
 import Repositories from './repositories';
-import { repositories } from './actions';
 import { clear } from "../Login/actions";
+import { getIssues } from './actions';
 
 const mapStateToProps = (state) => {
     return {
-        repo: state.repo,
+        repos: state.repos,
         user: state.user,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getRepositories: (url) => dispatch(repositories(url)),
         clearLogin: () => dispatch(clear()),
+        getIssues: (url) => dispatch(getIssues(url))
     }
 }
 

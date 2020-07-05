@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import {BrowserRouter as Router, Redirect, Route, Switch} from "react-router-dom";
 import Login  from './features/Login';
 import Repositories  from './features/Repositories';

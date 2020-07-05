@@ -13,7 +13,7 @@ import repoSaga from '../features/Repositories/sagas';
 
 const rootReducers = combineReducers({
   user: userReducer,
-  repo: repoReducer,
+  repos: repoReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

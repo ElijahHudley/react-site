@@ -1,17 +1,18 @@
 import { constants } from './actions';
 
 const initialState = {
-    items: []
+    items: [],
+    selected: [],
 }
 
 export const repoReducer = (state = initialState, action) => {
     switch(action.type) {
-        case constants.USER_LOGIN:
+        case constants.GET_ISSUES_SUCCESS:
+            return { ...state, selected: { ...action.payload } }
+        case constants.GET_REPOSITORIES:
             return { ...state, ...action.payload }
-        case constants.USER_LOGIN_SUCCESS:
+        case constants.GET_REPOSITORIES_SUCCESS:
             return { ...state, items: {...action.payload} }
-        case constants.USER_CLEAR:
-            return { ...action.payload }
         default:
             return state;
     }
