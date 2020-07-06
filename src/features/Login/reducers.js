@@ -2,6 +2,7 @@ import { constants } from './actions';
 
 const initialState = {
     isAuthenticated: false,
+    token: '',
 }
 
 export const userReducer = (state = initialState, action) => {

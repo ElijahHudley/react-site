@@ -10,7 +10,7 @@ import './style.scss';
 export default class Repositories extends Component {
   constructor(props) {
     super(props);
-    this.state = { issues: { }, currentItem: '' };
+    this.state = { issues: { }, currentItem: '', showRepoList: false };
   }
 
   componentDidMount() {
@@ -27,6 +27,11 @@ export default class Repositories extends Component {
     }
   }
 
+  toggleRepoList = () => {
+    const { showRepoList } = this.state;
+    this.setState({ showRepoList: !showRepoList });
+  }
+
   refreshIssues = (data) => {
     const { getIssues } = this.props;
 
@@ -39,6 +44,7 @@ export default class Repositories extends Component {
     const { repos } = this.props;
 
     this.setState({
+      showRepoList: true,
       currentItem: data.id,
       issues: {[data.id]: repos.selected[data.id] || {}}
     });
@@ -129,20 +135,16 @@ export default class Repositories extends Component {
 
   render() {
     const {user, clearLogin} = this.props;
-    const {currentItem} = this.state;
+    const {currentItem, showRepoList} = this.state;
 
     return (
         <div>
           <div className={'header'}>{`(${user.login}) Logged In`}</div>
+          <div className={'content-left-mobile-button'}>
 
-          <button
-              className={'button'}
-              onClick={() => this.refreshIssues()}>
-            {'Refresh'}
-          </button>
+          </div>
 
           <div className={'container'}>
-
             <div className={'content-left'}>
               <div className={'sub-header'}><span>Repositories</span></div>
               {this.leftColumn()}
@@ -152,6 +154,16 @@ export default class Repositories extends Component {
               <div className={'sub-header'}><span>Issues</span></div>
               {this.rightColumn(currentItem)}
             </div>
+
+            {currentItem !== '' && showRepoList && <div className={'content-right-mobile'}>
+              <div className={'sub-header'}><span>Issues</span></div>
+              <button
+                  className={'button'}
+                  onClick={() => this.toggleRepoList()}>
+                {'Close Issues'}
+              </button>
+              {this.rightColumn(currentItem)}
+            </div>}
           </div>
 
             <button

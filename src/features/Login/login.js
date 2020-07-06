@@ -11,7 +11,7 @@ export default function Login(props) {
   });
 
   const doLogin = () => {
-    if(key === null || key === '' || key.length < 10) {
+    if(key == null || key === '' || key.length < 10) {
       return;
     }
 
@@ -33,15 +33,6 @@ export default function Login(props) {
         >
           Login
         </button>
-        <button
-          className={'button'}
-          onClick={() => props.clearLogin()}
-        >
-          Clear
-        </button>
-
-        <div className={'sub-text'}> <span>{`logged In: ${props.user.isAuthenticated}`}</span></div>
-
       </div>
     </div>
   );

@@ -3,12 +3,20 @@
   background-color: rgba(112, 76, 182, 0.1);
   width: 100%;
   height: 20%;
-  font-size: 48px;
+  font-size: 1em;
   padding-top: 8px;
   padding-bottom: 8px;
   margin-top: 2px;
   font-family: 'Courier New', Courier, monospace;
 }
+.content-left-mobile-button {
+  background-color: red;
+
+  @media (min-width: 400px) {
+    display: none;
+  }
+}
+
 
 .container {
   width: 100%;
@@ -29,13 +37,45 @@
 
   .content-left {
     width: 25%;
+    @media (max-width: 400px) {
+      width: 100%;
+    }
   }
 
   .content-right {
     width: 75%;
-
+    @media (max-width: 400px) {
+      display: none;
+    }
   }
 
+  .content-right-mobile {
+    width: 100%;
+    position: absolute;
+    background: #e799ff;
+    height: 100%;
+
+    @media (min-width: 400px) {
+      display: none;
+    }
+  }
+
+  .content-right-mobile-enabled {
+    width: 75%;
+
+    @media (max-width: 400px) {
+      width: 100%;
+      display: block;
+    }
+  }
+
+
+  .content-right-selected {
+    @media (max-width: 400px) {
+      width: 100%;
+      display: block;
+    }
+  }
 
   .button {
     appearance: none;

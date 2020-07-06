@@ -22,7 +22,7 @@ export function* getUserSaga(action) {
     try {
         const data = yield call(getRequest, token);
         yield all([
-            put(loginSuccess(data)),
+            put(loginSuccess(token, data)),
             put(repositories(data.repos_url))
         ]);
     } catch (err) {

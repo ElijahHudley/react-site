@@ -13,16 +13,16 @@ export function login(token) {
     };
 }
 
-export function loginSuccess(data) {
+export function loginSuccess(token, data) {
     return {
         type: constants.USER_LOGIN_SUCCESS,
-        payload: { ...data, isAuthenticated: true},
+        payload: { ...data, isAuthenticated: true, token: token},
     };
 }
 
 export function clear() {
     return {
         type: constants.USER_CLEAR,
-        payload: { isAuthenticated: false }
+        payload: { isAuthenticated: false, token: '', data: {} }
     };
 }
