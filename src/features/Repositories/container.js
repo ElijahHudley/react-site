@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 
 import Repositories from './repositories';
 import { clear } from "../Login/actions";
-import { getIssues } from './actions';
+import { getIssues, updateIssues } from './actions';
 
 const mapStateToProps = (state) => {
     return {
@@ -15,7 +15,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         clearLogin: () => dispatch(clear()),
-        getIssues: (url) => dispatch(getIssues(url))
+        getIssues: (id, url) => dispatch(getIssues(id, url)),
+        updateIssues: (id, value) => dispatch(updateIssues(id, value))
     }
 }
 
