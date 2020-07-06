@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div class={'issueItem'}>
+        <span className={'issueItem-name'}>
+                <span>1: test</span>
+        </span>
+    </div>
+`;
