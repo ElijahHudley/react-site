@@ -89,14 +89,12 @@ export default class Repositories extends Component {
 
     return Object.keys(repos.items).map((item, index) => {
       return (
-          <div
-          key={`repos-left-${index}`}
-          className={repos.items[item].id === currentItem ? 'selected' : 'unselected'}>
             <ListItem
+              key={`repos-left-${index}`}
+              selected={repos.items[item].id === currentItem}
               name={repos.items[item].name}
               onClick={(items) => this.checkIssues(repos.items[item]) }
-            />
-          </div>)
+            />)
     });
   }
 
@@ -151,7 +149,7 @@ export default class Repositories extends Component {
           <div className={'header'}>{`(${user.login}) Logged In`}</div>
 
           <div className={'container'}>
-            <div className={showRepoList ? 'content-left-mobile-disabled' : 'content-left'}>
+            <div className={showRepoList ? 'content-left content-left-mobile-disabled' : 'content-left'}>
               <div className={'sub-header'}>
                 <span>Repositories</span>
               </div>

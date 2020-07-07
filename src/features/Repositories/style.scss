@@ -22,11 +22,6 @@
   }
 }
 
-
-.selected {
-  background-color: rgba(112, 76, 182, 0.5);
-}
-
 .container {
   width: 100%;
   height: 100%;
@@ -48,6 +43,14 @@
     width: 25%;
     @media (max-width: 600px) {
       width: 100%;
+    }
+
+    &.content-left-mobile-disabled {
+      display: none;
+
+      @media (min-width: 600px) {
+        display: block;
+      }
     }
   }
 
@@ -74,14 +77,6 @@
 
     @media (max-width: 400px) {
       width: 100%;
-      display: block;
-    }
-  }
-
-  .content-left-mobile-disabled {
-    display: none;
-
-    @media (min-width: 600px) {
       display: block;
     }
   }
