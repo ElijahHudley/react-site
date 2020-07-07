@@ -9,6 +9,11 @@
   margin-top: 2px;
   font-family: 'Courier New', Courier, monospace;
 }
+
+.header-right {
+  height: 25px;
+}
+
 .content-left-mobile-button {
   background-color: red;
 
@@ -35,20 +40,20 @@
     font-size: 16px;
     text-align: center;
     vertical-align: middle;
-    line-height: 90px;
-    padding-left: 16px;
+    line-height: 45px;
+    height: 50px;
   }
 
   .content-left {
     width: 25%;
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
       width: 100%;
     }
   }
 
   .content-right {
     width: 75%;
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
       display: none;
     }
   }
@@ -59,7 +64,7 @@
     background: #e799ff;
     height: 100%;
 
-    @media (min-width: 400px) {
+    @media (min-width: 600px) {
       display: none;
     }
   }
@@ -69,6 +74,14 @@
 
     @media (max-width: 400px) {
       width: 100%;
+      display: block;
+    }
+  }
+
+  .content-left-mobile-disabled {
+    display: none;
+
+    @media (min-width: 600px) {
       display: block;
     }
   }

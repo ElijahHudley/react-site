@@ -107,6 +107,8 @@ export default class Repositories extends Component {
 
     if(currentItem && dataSet) {
       return (<DragDropContext onDragEnd={this.onDragEnd}>
+        <div className={'header header-right'}>{`Drag to reorder`}</div>
+
         <Droppable droppableId="droppable">
           {(provided, snapshot) => (
               <div
@@ -147,13 +149,13 @@ export default class Repositories extends Component {
     return (
         <div>
           <div className={'header'}>{`(${user.login}) Logged In`}</div>
-          <div className={'content-left-mobile-button'}>
-
-          </div>
 
           <div className={'container'}>
-            <div className={'content-left'}>
-              <div className={'sub-header'}><span>Repositories</span></div>
+            <div className={showRepoList ? 'content-left-mobile-disabled' : 'content-left'}>
+              <div className={'sub-header'}>
+                <span>Repositories</span>
+              </div>
+
               {this.leftColumn()}
             </div>
 
@@ -163,13 +165,16 @@ export default class Repositories extends Component {
             </div>
 
             {currentItem !== '' && showRepoList && <div className={'content-right-mobile'}>
-              <div className={'sub-header'}><span>Issues</span></div>
+              <div className={'sub-header'}>
+                <span>Issues</span>
+              </div>
+              {this.rightColumn(currentItem)}
+
               <button
                   className={'button'}
                   onClick={() => this.toggleRepoList()}>
                 {'Close Issues'}
               </button>
-              {this.rightColumn(currentItem)}
             </div>}
           </div>
 
