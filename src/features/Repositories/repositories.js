@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 import ListItem from './ListItem';
@@ -100,6 +99,8 @@ export default class Repositories extends Component {
 
   rightColumn = (currentItem) => {
     const {issues} = this.state;
+    const {user} = this.props;
+
 
     const dataSet = issues[currentItem] || {};
 
@@ -123,7 +124,10 @@ export default class Repositories extends Component {
                           >
                             <IssueItem
                                 key={`repos-right-${index}`}
+                                image={user.avatar_url}
                                 number={index + 1}
+                                created={dataSet[item].created_at}
+                                updated={dataSet[item].updated_at}
                                 state={dataSet[item].state}
                                 name={dataSet[item].title}/>
                           </div>
