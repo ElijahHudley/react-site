@@ -29,7 +29,7 @@ export default class Repositories extends Component {
 
   toggleRepoList = () => {
     const { showRepoList } = this.state;
-    this.setState({ showRepoList: !showRepoList });
+    this.setState({ currentItem: null, showRepoList: !showRepoList });
   }
 
   refreshIssues = (data) => {
@@ -63,7 +63,7 @@ export default class Repositories extends Component {
   };
 
   onDragEnd = (result) => {
-    const { repos, updateIssues } = this.props;
+    const { updateIssues } = this.props;
     const { currentItem, issues } = this.state;
     const dataSet = issues[currentItem];
 
@@ -85,18 +85,22 @@ export default class Repositories extends Component {
 
   leftColumn = () => {
     const { repos } = this.props;
+    const { currentItem } = this.state;
 
     return Object.keys(repos.items).map((item, index) => {
-      return (<ListItem
+      return (
+          <div
           key={`repos-left-${index}`}
-          name={repos.items[item].name}
-          onClick={(items) => this.checkIssues(repos.items[item]) }
-      />)
+          className={repos.items[item].id === currentItem ? 'selected' : 'unselected'}>
+            <ListItem
+              name={repos.items[item].name}
+              onClick={(items) => this.checkIssues(repos.items[item]) }
+            />
+          </div>)
     });
   }
 
   rightColumn = (currentItem) => {
-    const {repos} = this.props;
     const {issues} = this.state;
 
     const dataSet = issues[currentItem] || {};
@@ -119,7 +123,8 @@ export default class Repositories extends Component {
                           >
                             <IssueItem
                                 key={`repos-right-${index}`}
-                                number={dataSet[item].number}
+                                number={index + 1}
+                                state={dataSet[item].state}
                                 name={dataSet[item].title}/>
                           </div>
                       )}
@@ -136,6 +141,9 @@ export default class Repositories extends Component {
   render() {
     const {user, clearLogin} = this.props;
     const {currentItem, showRepoList} = this.state;
+
+    window.scrollTo(0, 0)
+
     return (
         <div>
           <div className={'header'}>{`(${user.login}) Logged In`}</div>
