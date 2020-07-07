@@ -22,6 +22,7 @@ export default function Login(props) {
     <div>
       <div className={'row'}>
         <input
+            placeholder={'Insert github user api key'}
           className={'textbox'}
           aria-label="Login Token"
           value={key}
