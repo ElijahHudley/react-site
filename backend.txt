@@ -1,0 +1,7 @@
+backend implimentation:
+
+instead of the user inputing their api key, I'd have them login with standard username and password
+Id, map their api in database with their user information from github (no need to enter it twice when github has it)
+using the api key, I'd request fresh data only once on login, I can create a subscription service that pulls in new data periodically.
+the only info that will be stored in a database however, is what the user does, so if the user doesnt click on a repository, there will be no requests made to that github api endpoint. (this is to prevent reaching rate limit early)
+Its essentially like a cache that the user can save to database once they've manipulated the data by changing the order of issues, taking whats in their state interms of repo:issues, and saving it in backend.
