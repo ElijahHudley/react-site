@@ -1,7 +1,7 @@
 export const constants = {
-    USER_LOGIN: '@USER/SAVE_KEY',
-    USER_LOGIN_SUCCESS: '@USER/SAVE_KEY_SUCCESS',
-    USER_CLEAR:  '@USER/CLEAR_KEY',
+    USER_LOGIN: '@USER/USER_LOGIN',
+    USER_LOGIN_SUCCESS: '@USER/USER_LOGIN_SUCCESS',
+    USER_CLEAR:  '@USER/USER_CLEAR',
 }
 
 export function login(token) {

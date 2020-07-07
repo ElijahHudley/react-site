@@ -136,7 +136,6 @@ export default class Repositories extends Component {
   render() {
     const {user, clearLogin} = this.props;
     const {currentItem, showRepoList} = this.state;
-
     return (
         <div>
           <div className={'header'}>{`(${user.login}) Logged In`}</div>

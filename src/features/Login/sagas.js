@@ -8,7 +8,7 @@ const urls = {
     userRepos: `${base}/user/repos`,
 }
 
-const getRequest = async (token) => {
+export const getRequest = async (token) => {
     return await fetch(urls.user, token ? {
         headers: {
             authorization: `token ${token}`
