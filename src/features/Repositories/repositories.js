@@ -9,7 +9,7 @@ import './style.scss';
 export default class Repositories extends Component {
   constructor(props) {
     super(props);
-    this.state = { issues: { }, currentItem: '', showRepoList: false };
+    this.state = { currentItem: '', showRepoList: false };
   }
 
   componentDidMount() {
@@ -45,7 +45,6 @@ export default class Repositories extends Component {
     this.setState({
       showRepoList: true,
       currentItem: data.id,
-      issues: {[data.id]: repos.selected[data.id] || {}}
     });
 
     if(repos.selected[data.id] === undefined) {
@@ -62,9 +61,9 @@ export default class Repositories extends Component {
   };
 
   onDragEnd = (result) => {
-    const { updateIssues } = this.props;
-    const { currentItem, issues } = this.state;
-    const dataSet = issues[currentItem];
+    const { updateIssues, selected } = this.props;
+    const { currentItem } = this.state;
+    const dataSet = selected[currentItem];
 
     // dropped outside the list
     if (!result.destination) {
@@ -77,9 +76,7 @@ export default class Repositories extends Component {
         result.destination.index
     );
 
-    this.setState({ issues: { [currentItem]: items} }, () => {
-      updateIssues(currentItem, items)
-    });
+    updateIssues(currentItem, items)
   }
 
   leftColumn = () => {
@@ -98,11 +95,10 @@ export default class Repositories extends Component {
   }
 
   rightColumn = (currentItem) => {
-    const {issues} = this.state;
-    const {user} = this.props;
+    const {user, selected} = this.props;
 
 
-    const dataSet = issues[currentItem] || {};
+    const dataSet = selected[currentItem] || {};
 
     if(currentItem && dataSet) {
       return (<DragDropContext onDragEnd={this.onDragEnd}>
@@ -143,7 +139,7 @@ export default class Repositories extends Component {
   }
 
   render() {
-    const {user, clearLogin} = this.props;
+    const {user, clearLogin } = this.props;
     const {currentItem, showRepoList} = this.state;
 
     window.scrollTo(0, 0)
