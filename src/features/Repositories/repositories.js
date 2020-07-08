@@ -9,7 +9,7 @@ import './style.scss';
 export default class Repositories extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentItem: '', showRepoList: false };
+    this.state = { currentRepo: '', showRepoList: false };
   }
 
   componentDidMount() {
@@ -28,7 +28,7 @@ export default class Repositories extends Component {
 
   toggleRepoList = () => {
     const { showRepoList } = this.state;
-    this.setState({ currentItem: null, showRepoList: !showRepoList });
+    this.setState({ currentRepo: null, showRepoList: !showRepoList });
   }
 
   refreshIssues = (data) => {
@@ -44,7 +44,7 @@ export default class Repositories extends Component {
 
     this.setState({
       showRepoList: true,
-      currentItem: data.id,
+      currentRepo: data.id,
     });
 
     if(repos.selected[data.id] === undefined) {
@@ -62,9 +62,8 @@ export default class Repositories extends Component {
 
   onDragEnd = (result) => {
     const { updateIssues, selected } = this.props;
-    const { currentItem } = this.state;
-    const dataSet = selected[currentItem];
-
+    const { currentRepo } = this.state;
+    const dataSet = selected[currentRepo];
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -76,31 +75,31 @@ export default class Repositories extends Component {
         result.destination.index
     );
 
-    updateIssues(currentItem, items)
+    updateIssues(currentRepo, items)
   }
 
   leftColumn = () => {
     const { repos } = this.props;
-    const { currentItem } = this.state;
+    const { currentRepo } = this.state;
 
     return Object.keys(repos.items).map((item, index) => {
       return (
             <ListItem
               key={`repos-left-${index}`}
-              selected={repos.items[item].id === currentItem}
+              selected={repos.items[item].id === currentRepo}
               name={repos.items[item].name}
               onClick={(items) => this.checkIssues(repos.items[item]) }
             />)
     });
   }
 
-  rightColumn = (currentItem) => {
+  rightColumn = (currentRepo) => {
     const {user, selected} = this.props;
 
 
-    const dataSet = selected[currentItem] || {};
+    const dataSet = selected[currentRepo] || {};
 
-    if(currentItem && dataSet) {
+    if(currentRepo && dataSet) {
       return (<DragDropContext onDragEnd={this.onDragEnd}>
         <div className={'header header-right'}>{`Drag to reorder`}</div>
 
@@ -140,7 +139,7 @@ export default class Repositories extends Component {
 
   render() {
     const {user, clearLogin } = this.props;
-    const {currentItem, showRepoList} = this.state;
+    const {currentRepo, showRepoList} = this.state;
 
     window.scrollTo(0, 0)
 
@@ -159,14 +158,14 @@ export default class Repositories extends Component {
 
             <div className={'content-right'}>
               <div className={'sub-header'}><span>Issues</span></div>
-              {this.rightColumn(currentItem)}
+              {this.rightColumn(currentRepo)}
             </div>
 
-            {currentItem !== '' && showRepoList && <div className={'content-right-mobile'}>
+            {currentRepo !== '' && showRepoList && <div className={'content-right-mobile'}>
               <div className={'sub-header'}>
                 <span>Issues</span>
               </div>
-              {this.rightColumn(currentItem)}
+              {this.rightColumn(currentRepo)}
 
               <button
                   className={'button'}
