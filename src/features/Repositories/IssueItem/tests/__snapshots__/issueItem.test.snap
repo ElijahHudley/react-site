@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<div class={'issueItem'}>
-        <span className={'issueItem-name'}>
-                <span>1: test</span>
-        </span>
+<div class="issueItem">
+    <div class="issueItem-name">
+        <img src="null" class="issueItem-image">
+        <span>1: title - open</span>
+        <span>Create At: 07/11/20</span>
+        <span>Updated: 1 Days Ago</span>
     </div>
+</div>
 `;
