@@ -1,7 +1,7 @@
 import { runSaga } from 'redux-saga';
 import { put, all } from 'redux-saga/effects';
 
-import { constants, login, loginSuccess, clear } from '../actions';
+import { constants, login, loginSuccess, loginUserAuth } from '../actions';
 import { repositories } from '../../Repositories/actions';
 
 import { userReducer } from '../reducers';
@@ -30,7 +30,7 @@ describe('test user state actions', () => {
             location: "Chicago",
             login: "ElijahHudley",
             name: "Elijah Hudley",
-            isAuthenticated: true,
+            isAuthenticated: false,
             token: fakeToken,
         };
 
@@ -40,6 +40,17 @@ describe('test user state actions', () => {
                 login: "ElijahHudley",
                 name: "Elijah Hudley",
             })
+        )).toEqual(expectedState);
+    });
+
+    test('should test login authenticated', () => {
+        const expectedState = {
+            token: fakeToken,
+            isAuthenticated: true
+        };
+
+        expect(userReducer(mockState,
+            loginUserAuth(true)
         )).toEqual(expectedState);
     });
 

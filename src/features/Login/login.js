@@ -16,8 +16,12 @@ export default function Login(props) {
       setError('Must enter a valid api key');
       return;
     }
-
     props.login(key);
+
+    if(!props.user.isAuthenticated || props.user.login === undefined) {
+      setError('Unable to authenticate user');
+      return;
+    }
   }
 
   return (
