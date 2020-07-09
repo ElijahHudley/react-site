@@ -9,7 +9,7 @@ import './style.scss';
 export default class Repositories extends Component {
   constructor(props) {
     super(props);
-    this.state = { currentRepo: '', showRepoList: false };
+    this.state = { showRepoList: false };
   }
 
   componentDidMount() {
@@ -19,8 +19,14 @@ export default class Repositories extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentRepo !== nextProps.currentRepo) {
+      this.setState({ ...this.state, showRepoList: true })
+    }
+  }
+
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const { user } = this.props;
+    const { user, selected } = this.props;
     if(!user.isAuthenticated && prevProps.user.isAuthenticated) {
       this.props.history.push('/');
     }
@@ -42,14 +48,9 @@ export default class Repositories extends Component {
   checkIssues = (data) => {
     const { repos } = this.props;
 
-    this.setState({
-      showRepoList: true,
-      currentRepo: data.id,
-    });
-
-    if(repos.selected[data.id] === undefined) {
+    //if(repos.selected[data.id] === undefined) {
       this.refreshIssues(data);
-    }
+    //}
   }
 
   reorder = (list, startIndex, endIndex) => {
@@ -61,8 +62,7 @@ export default class Repositories extends Component {
   };
 
   onDragEnd = (result) => {
-    const { updateIssues, selected } = this.props;
-    const { currentRepo } = this.state;
+    const { updateIssues, selected, currentRepo } = this.props;
     const dataSet = selected[currentRepo];
     // dropped outside the list
     if (!result.destination) {
@@ -79,8 +79,7 @@ export default class Repositories extends Component {
   }
 
   leftColumn = () => {
-    const { repos } = this.props;
-    const { currentRepo } = this.state;
+    const { repos, currentRepo } = this.props;
 
     if(repos.items === null || !Object.keys(repos.items).length) {
       return (<span className={'sub-header'}> No repositories retrieved </span>)
@@ -97,13 +96,24 @@ export default class Repositories extends Component {
     });
   }
 
-  rightColumn = (currentRepo) => {
-    const {user, selected} = this.props;
+  rightColumn = () => {
+    const { user, selected, currentRepo } = this.props;
 
+    if(currentRepo === '') {
+      return (<span className={'sub-header'}> Please select a repository </span>)
+    }
+
+    if(selected[currentRepo] === undefined) {
+      return (<span className={'sub-header'}> Getting issues... </span>)
+    }
+
+    if(!selected[currentRepo].length) {
+      return (<span className={'sub-header'}> No issues in repository </span>)
+    }
 
     const dataSet = selected[currentRepo] || {};
 
-    if(currentRepo && dataSet) {
+    if(dataSet) {
       return (<DragDropContext onDragEnd={this.onDragEnd}>
         <div className={'header header-right'}>{`Drag to reorder`}</div>
 
@@ -142,8 +152,8 @@ export default class Repositories extends Component {
   }
 
   render() {
-    const {user, clearLogin } = this.props;
-    const {currentRepo, showRepoList} = this.state;
+    const { user, clearLogin, currentRepo } = this.props;
+    const { showRepoList } = this.state;
 
     window.scrollTo(0, 0)
 
@@ -169,7 +179,7 @@ export default class Repositories extends Component {
               <div className={'sub-header'}>
                 <span>Issues</span>
               </div>
-              {this.rightColumn(currentRepo)}
+              {this.rightColumn()}
 
               <button
                   className={'button'}

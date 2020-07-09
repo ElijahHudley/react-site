@@ -9,7 +9,8 @@ const mapStateToProps = (state) => {
     return {
         repos: state.repos,
         user: state.user,
-        selected: state.repos.selected
+        selected: state.repos.selected || {},
+        currentRepo: state.repos.currentRepo,
     }
 }
 
