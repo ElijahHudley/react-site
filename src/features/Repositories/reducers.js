@@ -7,6 +7,8 @@ const initialState = {
 
 export const repoReducer = (state = initialState, action) => {
     switch(action.type) {
+        case constants.GET_ISSUES:
+            return { ...state, ...action.payload}
         case constants.GET_ISSUES_SUCCESS:
             return { ...state, selected: { ...state.selected, ...action.payload } }
         case constants.GET_REPOSITORIES:
