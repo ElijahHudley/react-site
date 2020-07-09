@@ -82,6 +82,10 @@ export default class Repositories extends Component {
     const { repos } = this.props;
     const { currentRepo } = this.state;
 
+    if(repos.items === null || !Object.keys(repos.items).length) {
+      return (<span className={'sub-header'}> No repositories retrieved </span>)
+    }
+
     return Object.keys(repos.items).map((item, index) => {
       return (
             <ListItem
