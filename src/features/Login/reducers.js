@@ -13,6 +13,8 @@ export const userReducer = (state = initialState, action) => {
             return { ...state, ...action.payload }
         case constants.USER_CLEAR:
             return { ...action.payload }
+        case constants.USER_AUTHENICATE:
+            return { ...state, ...action.payload }
         default:
             return state;
     }

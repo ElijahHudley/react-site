@@ -1,5 +1,5 @@
-import { put, takeEvery, call, all } from 'redux-saga/effects';
-import { constants, loginSuccess } from './actions';
+import { put, takeEvery, call, all, select } from 'redux-saga/effects';
+import { constants, loginSuccess, loginUserAuth } from './actions';
 import { repositories } from '../Repositories/actions';
 const base = 'https://api.github.com';
 
@@ -21,10 +21,18 @@ export function* getUserSaga(action) {
 
     try {
         const data = yield call(getRequest, token);
+
         yield all([
             put(loginSuccess(token, data)),
             put(repositories(data.repos_url))
         ]);
+
+        const state = yield select();
+
+        if(state.repos !== null) {
+            yield put(loginUserAuth(true))
+        }
+
     } catch (err) {
         console.log(err);
     }

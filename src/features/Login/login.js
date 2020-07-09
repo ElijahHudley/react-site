@@ -3,15 +3,22 @@ import './style.scss';
 
 export default function Login(props) {
   const [key, setKey] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    if(props.user.isAuthenticated || props.user.login) {
+    if(props.user.isAuthenticated && props.user.login) {
       props.history.push('/repositories');
     }
   });
 
   const doLogin = () => {
     if(key == null || key === '' || key.length < 10) {
+      setError('Must enter a valid api key');
+      return;
+    }
+
+    if(!props.user.isAuthenticated || props.user.login === undefined) {
+      setError('Unable to authenticate user');
       return;
     }
 
@@ -34,6 +41,8 @@ export default function Login(props) {
         >
           Login
         </button>
+
+        <span>{error}</span>
       </div>
     </div>
   );
