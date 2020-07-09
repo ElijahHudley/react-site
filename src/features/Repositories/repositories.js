@@ -98,8 +98,19 @@ export default class Repositories extends Component {
   }
 
   rightColumn = (currentRepo) => {
-    const {user, selected} = this.props;
+    const { user, selected } = this.props;
 
+    if(currentRepo === '') {
+      return (<span className={'sub-header'}> Please select a repository </span>)
+    }
+
+    if(selected[currentRepo] === undefined) {
+      return (<span className={'sub-header'}> Getting issues... </span>)
+    }
+
+    if(!selected[currentRepo].length) {
+      return (<span className={'sub-header'}> No issues in repository </span>)
+    }
 
     const dataSet = selected[currentRepo] || {};
 
