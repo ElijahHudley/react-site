@@ -114,7 +114,7 @@ export default class Repositories extends Component {
 
     const dataSet = selected[currentRepo] || {};
 
-    if(currentRepo && dataSet) {
+    if(dataSet) {
       return (<DragDropContext onDragEnd={this.onDragEnd}>
         <div className={'header header-right'}>{`Drag to reorder`}</div>
 
@@ -156,7 +156,7 @@ export default class Repositories extends Component {
     const {user, clearLogin } = this.props;
     const {currentRepo, showRepoList} = this.state;
 
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
 
     return (
         <div>
