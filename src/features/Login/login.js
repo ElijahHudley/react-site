@@ -17,11 +17,6 @@ export default function Login(props) {
       return;
     }
 
-    if(!props.user.isAuthenticated || props.user.login === undefined) {
-      setError('Unable to authenticate user');
-      return;
-    }
-
     props.login(key);
   }
 
