@@ -10,7 +10,7 @@
     "fetch": "^1.1.0",
     "fetch-mock": "^9.10.3",
     "jest-fetch-mock": "^3.0.3",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-beautiful-dnd": "^13.0.0",
